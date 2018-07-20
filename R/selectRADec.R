@@ -1,4 +1,4 @@
-selectRADec=function(RA, Dec, RAlo=0, RAhi=90, Declo=-10, Dechi=10){
+selectRADec=function(RA, Dec, RAlo = 129, RAhi = 141, Declo = -2, Dechi = 3){
   if (is.matrix(RA) || is.data.frame(RA)) {
     Dec = RA[, 2]
     RA = RA[, 1]

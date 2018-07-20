@@ -20,16 +20,18 @@ checkgood=function(xy_start, xy_end, z_start=0, z_end=250, threshold=0.1){
   endsep=sqrt(rowSums((xy_start-xy_end)^2))
 
   dists=nn2(xy_end, xy_start)
+  origref=dists$nn.idx[,1]
   mightcollide=dists$nn.dists<endsep
   dists$nn.idx[!mightcollide]=0
-  check=which(tabulate(c(which(dists$nn.idx[,1]>0), dists$nn.idx[dists$nn.idx[,1]>0,1]))>=2)
-  check=dists$nn.idx[dists$nn.idx[check,1],1]
-  check=check[check>0]
+  check=which(tabulate(c(which(dists$nn.idx[,1]>0), dists$nn.idx[dists$nn.idx[,1]>0,1]))>=1)
+  #check=origref[origref[check]]
+  #check=check[check>0]
 
   checkgrid=cbind(check,dists$nn.idx[check,1])
+  checkgrid=checkgrid[checkgrid[,1]>0 & checkgrid[,2]>0,]
 
-  linecheck=linedist(xyz_start[checkgrid[,1],], xyz_end[checkgrid[,1],], xyz_start[checkgrid[,2],], xyz_end[checkgrid[,2],])
-  invisible(checkgrid[linecheck<=threshold,])
+  linecheck=linedist(xyz_start[checkgrid[,1],,drop=FALSE], xyz_end[checkgrid[,1],,drop=FALSE], xyz_start[checkgrid[,2],,drop=FALSE], xyz_end[checkgrid[,2],,drop=FALSE])
+  invisible(checkgrid[linecheck<=threshold,,drop=FALSE])
 }
 
 linedist=function(start1=cbind(0,0,0), end1=cbind(0,0,250), start2=cbind(0,0,0), end2=cbind(0,0,250)){
