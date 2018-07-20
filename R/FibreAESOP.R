@@ -1,4 +1,4 @@
-FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_data='lo', assign_AESOP=TRUE, avoid=0.9){
+FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_data='lo', assign_AESOP=TRUE, avoid=0.9, threshold=0.1){
   if (is.matrix(RA_data) || is.data.frame(RA_data)) {
     Dec_data = RA_data[, 2]
     RA_data = RA_data[, 1]
@@ -91,7 +91,7 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
       y1_mm=car_temp_mm[,2])
     spines[,sep_mm:=sqrt((x0_mm-x1_mm)^2+(y0_mm-y1_mm)^2)]
 
-    collide=checkgood(spines[,list(x0_mm,y0_mm)],spines[,list(x1_mm,y1_mm)]) #check for bad 3D solution
+    collide=checkgood(spines[,list(x0_mm,y0_mm)],spines[,list(x1_mm,y1_mm)], threshold=threshold) #check for bad 3D solution
     if(length(collide)==0){
       break
     }else{ #remove lower ranked colliding fibre from list and try again from scratch
