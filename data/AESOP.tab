@@ -4,10 +4,13 @@
 #This file contains one entry per Fiber/Positioner, and gives the coordinates and details of each fiber
 #Other info:
 #Pitch is 9.542mm between fibres
-#Fibe size is 0.085, so 1.43 asec
+#Fibre size is 0.085, so 1.43 asec
 #Plate scale is 0.0594 mm/asec
 #FoV is 535mm = 2.502 degrees diameter
 #Rad curve 4,653 mm
+#3D avoidance is 0.1mm
+#Tip avoidance is 0.9mm
+#Spine length is 250mm
 #Patrol requirement is 11.5mm, but in practice they expect 12.3mm +/- 0.5 (so 11.8-12.8mm)
 #Description of columns:
 #Index  Name        Format    Description
