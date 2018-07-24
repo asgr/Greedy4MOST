@@ -1,5 +1,6 @@
-FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_data='lo', assign_AESOP=TRUE, avoid=0.9, threshold=0.1){
+FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_data='lo', assign_AESOP=TRUE, avoid=0.9, threshold=0.1+0.085){
   if (is.matrix(RA_data) || is.data.frame(RA_data)) {
+    RA_data=as.matrix(RA_data)
     Dec_data = RA_data[, 2]
     RA_data = RA_data[, 1]
   }

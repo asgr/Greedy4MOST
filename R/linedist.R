@@ -13,25 +13,24 @@
 # dist = np.linalg.norm(np.dot(c,cross))/np.linalg.norm(cross)
 # print(dist) # should be 5.36
 
-checkgood=function(xy_start, xy_end, z_start=0, z_end=250, threshold=0.1){
+checkgood=function(xy_start, xy_end, z_start=0, z_end=250, threshold=0.1+0.085){
   xyz_start=as.matrix(cbind(xy_start, z_start))
   xyz_end=as.matrix(cbind(xy_end, z_end))
 
-  endsep=sqrt(rowSums((xy_start-xy_end)^2))
+  endsep=sqrt(rowSums((xy_start-xy_end)^2)) #xy start to end distance for each fibre
 
-  dists=nn2(xy_end, xy_start)
-  origref=dists$nn.idx[,1]
-  mightcollide=dists$nn.dists<endsep
-  dists$nn.idx[!mightcollide]=0
-  check=which(tabulate(c(which(dists$nn.idx[,1]>0), dists$nn.idx[dists$nn.idx[,1]>0,1]))>=1)
-  #check=origref[origref[check]]
-  #check=check[check>0]
+  dists=nn2(xy_end, xy_start) #Calculate distances between all fibre start and end points
 
-  checkgrid=cbind(check,dists$nn.idx[check,1])
-  checkgrid=checkgrid[checkgrid[,1]>0 & checkgrid[,2]>0,]
+  mightcollide=dists$nn.dists<endsep #which fibres are closer to a start point than the fibre's own end point (so crossing)
+  Nrep=rowSums(mightcollide) #Find our how many colliding fibres are near to each fibre
+  dists$nn.idx[!mightcollide]=0 #Set everything else to 0 (so only things above 0 might be colliding)
 
+  #The next line is complicated looking, but it just flattens the matches so each match pair appears once.
+  checkgrid=cbind(rep(1:length(dists$nn.idx[,1]), times=Nrep), unlist(t(dists$nn.idx)[t(dists$nn.idx)>0]))
+
+  #Use the linedist function only on pairs which are known to cross within the geometry of AESOP
   linecheck=linedist(xyz_start[checkgrid[,1],,drop=FALSE], xyz_end[checkgrid[,1],,drop=FALSE], xyz_start[checkgrid[,2],,drop=FALSE], xyz_end[checkgrid[,2],,drop=FALSE])
-  invisible(checkgrid[linecheck<=threshold,,drop=FALSE])
+  invisible(checkgrid[linecheck<=threshold,,drop=FALSE]) #Return just those within the matching threshold
 }
 
 linedist=function(start1=cbind(0,0,0), end1=cbind(0,0,250), start2=cbind(0,0,0), end2=cbind(0,0,250)){
