@@ -1,10 +1,9 @@
 exportPattern("^[[:alpha:]]+")
 
-import('rgl')
 import('data.table')
-import('celestial')
-import('magicaxis')
-import('celestial')
-import('sphereplot')
 
+importFrom('celestial', 'coordmatch')
+importFrom('sphereplot', 'car2sph', 'sph2car')
+importFrom('rgl', 'rotate3d')
 importFrom('pracma', 'cross', 'dot')
+importFrom('RANN', 'nn2')

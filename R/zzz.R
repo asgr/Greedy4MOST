@@ -26,8 +26,11 @@
 #9      Slitpos     integer   Slitpos within slitlet
 #-----  ----------- --------- --------------------------------------------------------------------------------
 
-.onLoad <- function(libname, pkgname, platescale=0.0594, patrol_mm=11.5){
-  data('AESOP')
+.onLoad <- function(libname, pkgname){
+  platescale=0.0594; patrol_mm=11.5
+  x0_asec=x0_mm=y0_asec=y0_mm=x0_rad=y0_rad=patrol_asec=NULL
+  AESOP=NULL
+  utils::data('AESOP', package='Greedy4MOST', envir = environment())
   AESOP=as.data.table(AESOP)
   AESOP$Spectro=as.character(AESOP$Spectro)
   AESOP[,x0_asec:=x0_mm/platescale]

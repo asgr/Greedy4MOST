@@ -1,4 +1,7 @@
 FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_data='lo', assign_AESOP=TRUE, avoid=0.9, threshold=0.1+0.085){
+
+  fibreID=x0_mm=y0_mm=sep_mm=x1_mm=y1_mm=x0_rad=y0_rad=NULL
+
   if (is.matrix(RA_data) || is.data.frame(RA_data)) {
     RA_data=as.matrix(RA_data)
     Dec_data = RA_data[, 2]
@@ -35,15 +38,15 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
   pri_data=pri_data[select1]
   res_data=res_data[select1]
 
-  intern_clean=coordmatch(cbind(RA_data[ref], Dec_data[ref]), rad=avoid/AESOP_platescale)
+  intern_clean=coordmatch(cbind(RA_data[ref], Dec_data[ref]), rad=avoid/AESOP_platescale) #Find objects that are close on the focal plane
   if(length(intern_clean$bestmatch$refID)>0){
     keepLHS=pri_data[intern_clean$bestmatch$refID]>=pri_data[intern_clean$bestmatch$compareID]
-    keep=c(intern_clean$bestmatch$refID[keepLHS], intern_clean$bestmatch$compareID[!keepLHS])
+    keep=c(intern_clean$bestmatch$refID[keepLHS], intern_clean$bestmatch$compareID[!keepLHS]) #Only keep the highest priority object
   }else{
     keep={}
   }
 
-  select2=sort(c(which(intern_clean$ID[,1]==0),keep))
+  select2=unique(sort(c(which(intern_clean$ID[,1]==0),keep)))
 
   #Remake reference list based on avoiding lower ranked objects that are within the distance specified by 'avoid'.
 
