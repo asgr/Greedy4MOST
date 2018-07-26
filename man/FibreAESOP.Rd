@@ -72,7 +72,7 @@ The patrol radius is not an argument since this might eventually vary per fibre,
 }
 
 \seealso{
-\code{\link{TileAESOP}}, \code{\link{checkgood}}
+\code{\link{Greedy4MOST}}, \code{\link{TileAESOP}}, \code{\link{checkgood}}
 }
 \examples{
 ## None yet

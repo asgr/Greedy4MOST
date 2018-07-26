@@ -8,7 +8,8 @@ Calculate the Best Location for a 'Greedy' AESOP Tile
 Given coordinates and weights for a data set, this function will compute the optimal position to place AESOP given a 'greedy' approach to tiling.
 }
 \usage{
-TileAESOP(RA_data, Dec_data, weight_data = 1, RAlo = 129, RAhi = 141, Declo = -2, Dechi = 3, grid = 0.1, Nsamp = 10000, rad = sqrt(4.06/pi))
+TileAESOP(RA_data, Dec_data, weight_data = 1, RAlo = 129, RAhi = 141, Declo = -2,
+Dechi = 3, grid = 0.1, Nsamp = 10000, rad = sqrt(4.06/pi))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,7 +20,7 @@ Numeric vector; Right Ascensions of targets to be fibred (degrees). For convenie
 Numeric vector; Declinations of targets to be fibred (degrees).
 }
   \item{weight_data}{
-Numeric vector; greedy observing weights of all potential targets. Higher weights target will make it more likely that the optimal AESOP position is selected to be there.
+Numeric vector; greedy observing weights of all potential targets. Higher weight targets will make it more likely that the optimal AESOP position is selected to be there.
 }
   \item{RAlo}{
 Numeic scalar; the assumed low right ascension extent of the data (degrees).
@@ -63,7 +64,7 @@ Aaron Robotham
 }
 
 \seealso{
-\code{\link{FibreAESOP}}, \code{\link{checkgood}}
+\code{\link{Greedy4MOST}}, \code{\link{FibreAESOP}}, \code{\link{checkgood}}
 }
 \examples{
 ## None yet

@@ -39,7 +39,8 @@
   AESOP[,y0_rad:=y0_mm*pi/180/3600/platescale]
   AESOP[,patrol_mm:=patrol_mm]
   AESOP[,patrol_asec:=patrol_mm/platescale]
-  assign("AESOP_fibres", AESOP, envir=globalenv())
-  assign("AESOP_platescale", platescale, envir=globalenv())
-  assign("AESOP_fibrad_mm", 0.085, envir=globalenv())
+  assign("GreedyEnv", new.env(), .GlobalEnv)
+  assign("AESOP_fibres", AESOP, envir=GreedyEnv)
+  assign("AESOP_platescale", platescale, envir=GreedyEnv)
+  assign("AESOP_fibrad_mm", 0.085, envir=GreedyEnv)
 }

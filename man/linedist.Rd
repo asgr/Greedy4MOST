@@ -8,7 +8,8 @@ Calculate Nearest Separation Between Infinite Lines
 This function is mostly to be used by \code{\link{checkgood}} to determine if fibres are colliding or not.
 }
 \usage{
-linedist(start1 = cbind(0, 0, 0), end1 = cbind(0, 0, 250), start2 = cbind(0, 0, 0), end2 = cbind(0, 0, 250))
+linedist(start1 = cbind(0, 0, 0), end1 = cbind(0, 0, 250), start2 = cbind(0, 0, 0),
+end2 = cbind(0, 0, 250))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

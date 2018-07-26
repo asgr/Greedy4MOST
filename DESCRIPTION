@@ -1,6 +1,6 @@
 Package: Greedy4MOST
 Type: Package
-Title: Tiles a survey with 4MOST+AESOP
+Title: Tiles a Survey with 4MOST and AESOP
 Version: 0.1.0
 Author: Aaron Robotham
 Maintainer: Aaron Robotham <aaron.robotham@uwa.edu.au>
@@ -8,4 +8,4 @@ Description: It uses the Robotham 2010 Greedy approach to tile a survey with 4MO
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: rgl, sphereplot, data.table, celestial, pracma, RANN
+Imports: rgl, sphereplot, data.table, celestial (>=1.4.3), pracma, RANN

@@ -13,18 +13,18 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
 
   if(length(pri_data)==1){pri_data=rep(pri_data,length(RA_data))}
   if(length(res_data)==1){res_data=rep(res_data,length(RA_data))}
-  if(length(assign_AESOP)==1){assign_AESOP=rep(assign_AESOP,dim(AESOP_fibres)[1])}
+  if(length(assign_AESOP)==1){assign_AESOP=rep(assign_AESOP,dim(GreedyEnv$AESOP_fibres)[1])}
 
 
   if(length(pri_data) != length(RA_data)){stop('pri_data is not the right length')}
-  if(length(assign_AESOP) != dim(AESOP_fibres)[1]){stop('assign_AESOP is not the right length')}
+  if(length(assign_AESOP) != dim(GreedyEnv$AESOP_fibres)[1]){stop('assign_AESOP is not the right length')}
 
   pri_data_orig=pri_data
 
   AESOP_pos=MoveAESOP(RA_AESOP=RA_AESOP, Dec_AESOP=Dec_AESOP)
   data_car=sph2car(RA_data, Dec_data)
   #select1=which(RA_data>min(AESOP_pos[,'RA']) & RA_data<max(AESOP_pos[,'RA']) & Dec_data>min(AESOP_pos[,'Dec']) & Dec_data<max(AESOP_pos[,'Dec']))
-  fibradmax=max(AESOP_fibres$patrol_asec)*pi/180/3600
+  fibradmax=max(GreedyEnv$AESOP_fibres$patrol_asec)*pi/180/3600
   select1=data_car[,1]>min(AESOP_pos$car[,1]-fibradmax) &
           data_car[,1]<max(AESOP_pos$car[,1]+fibradmax) &
           data_car[,2]>min(AESOP_pos$car[,2]-fibradmax) &
@@ -38,7 +38,7 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
   pri_data=pri_data[select1]
   res_data=res_data[select1]
 
-  intern_clean=coordmatch(cbind(RA_data[ref], Dec_data[ref]), rad=avoid/AESOP_platescale) #Find objects that are close on the focal plane
+  intern_clean=coordmatch(cbind(RA_data[ref], Dec_data[ref]), rad=avoid/GreedyEnv$AESOP_platescale) #Find objects that are close on the focal plane
   if(length(intern_clean$bestmatch$refID)>0){
     keepLHS=pri_data[intern_clean$bestmatch$refID]>=pri_data[intern_clean$bestmatch$compareID]
     keep=c(intern_clean$bestmatch$refID[keepLHS], intern_clean$bestmatch$compareID[!keepLHS]) #Only keep the highest priority object
@@ -61,12 +61,12 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
   while(length(check)>0){ #This loop is here to make sure we don't have any bad 3D solutions
     best_fib_lo={}
     best_fib_hi={}
-    select_AESOP_lo=which(assign_AESOP & AESOP_fibres$Spectro %in% c('LR-A', 'LR-B'))
-    select_AESOP_hi=which(assign_AESOP & AESOP_fibres$Spectro %in% c('HR'))
+    select_AESOP_lo=which(assign_AESOP & GreedyEnv$AESOP_fibres$Spectro %in% c('LR-A', 'LR-B'))
+    select_AESOP_hi=which(assign_AESOP & GreedyEnv$AESOP_fibres$Spectro %in% c('HR'))
     for(pri in pri_data_list){
       reftemp=ref[pri_data==pri & res_data %in% 'lo' & 1:length(ref) %in% check]
       if(length(reftemp)==0){break}
-      match_fib=coordmatch(AESOP_pos$sph[select_AESOP_lo,,drop=FALSE], cbind(RA_data[reftemp], Dec_data[reftemp]), rad=AESOP_fibres$patrol_asec[select_AESOP_lo])
+      match_fib=coordmatch(AESOP_pos$sph[select_AESOP_lo,,drop=FALSE], cbind(RA_data[reftemp], Dec_data[reftemp]), rad=GreedyEnv$AESOP_fibres$patrol_asec[select_AESOP_lo])
       if(all(is.na(match_fib$Nmatch))){break}
       best_fib_lo=rbind(best_fib_lo, data.table(fibreID=select_AESOP_lo[match_fib$bestmatch$refID], galaxyID=reftemp[match_fib$bestmatch$compareID], sep=match_fib$bestmatch$sep))
       select_AESOP_lo=select_AESOP_lo[-match_fib$bestmatch$refID]
@@ -76,7 +76,7 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
     for(pri in pri_data_list){
       reftemp=ref[pri_data==pri & res_data %in% 'hi']
       if(length(reftemp)==0){break}
-      match_fib=coordmatch(AESOP_pos$sph[select_AESOP_hi,], cbind(RA_data[reftemp], Dec_data[reftemp]), rad=AESOP_fibres$patrol_asec[select_AESOP_hi])
+      match_fib=coordmatch(AESOP_pos$sph[select_AESOP_hi,], cbind(RA_data[reftemp], Dec_data[reftemp]), rad=GreedyEnv$AESOP_fibres$patrol_asec[select_AESOP_hi])
       if(all(is.na(match_fib$Nmatch))){break}
       best_fib_hi=rbind(best_fib_hi, data.table(fibreID=select_AESOP_hi[match_fib$bestmatch$refID], galaxyID=reftemp[match_fib$bestmatch$compareID], sep=match_fib$bestmatch$sep))
       select_AESOP_hi=select_AESOP_hi[-match_fib$bestmatch$refID]
@@ -89,10 +89,10 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
     car_temp=sph2car(rbind(data_pos_lo, data_pos_hi))
     car_temp=rotate3d(car_temp, x=0, y=0, z=1, angle=-(pi/2-RA_AESOP*pi/180))
     car_temp=rotate3d(car_temp, x=1, y=0, z=0, angle=-(pi/2-Dec_AESOP*pi/180))
-    car_temp_mm=car_temp[,1:2]/(pi/180/3600/AESOP_platescale)
+    car_temp_mm=car_temp[,1:2]/(pi/180/3600/GreedyEnv$AESOP_platescale)
     spines=data.table(
-      x0_mm=AESOP_fibres[c(best_fib_lo$fibreID,best_fib_hi$fibreID),x0_mm],
-      y0_mm=AESOP_fibres[c(best_fib_lo$fibreID,best_fib_hi$fibreID),y0_mm],
+      x0_mm=GreedyEnv$AESOP_fibres[c(best_fib_lo$fibreID,best_fib_hi$fibreID),x0_mm],
+      y0_mm=GreedyEnv$AESOP_fibres[c(best_fib_lo$fibreID,best_fib_hi$fibreID),y0_mm],
       x1_mm=car_temp_mm[,1],
       y1_mm=car_temp_mm[,2])
     spines[,sep_mm:=sqrt((x0_mm-x1_mm)^2+(y0_mm-y1_mm)^2)]
