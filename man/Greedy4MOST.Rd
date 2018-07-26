@@ -1,5 +1,6 @@
 \name{Greedy4MOST}
 \alias{Greedy4MOST}
+\alias{denmap}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Greedy 4MOST Tiler
@@ -11,6 +12,9 @@ This is the highest level interface to the greedy tiling code, and is the interf
 Greedy4MOST(tiles = 1:10, RA_data, Dec_data, pri_data, T_data, weight_data='T_data',
 T_AESOP = 20, RAlo = 157.3, RAhi = 225, Declo = -4, Dechi = 4, grid = 0.1, Nsamp = 10000,
 rad = sqrt(4.06/pi), pri_base = 100, verbose = TRUE)
+
+denmap(RA_data, Dec_data, pri_data=pri_base, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4,
+grid=0.1, rad=grid, pri_base=100)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -54,7 +58,7 @@ Numeic scalar; the grid step size for potential AESOP tile centres (degrees).
 Numeic integer; number of sample points to select from the target data (too large will make the tiling very slow).
 }
   \item{rad}{
-Numeic scalar; the effective radius of AESOP assumed (we apprpoximate the field of view to be circular for speed).
+Numeic scalar; the effective radius of AESOP assumed (we approximate the field of view to be circular for speed).
 }
   \item{pri_base}{
 Numeric scalaer; the baseline (so starting reference) priority. Anything below this should be considered to be observed, and anything equal or above still needs some exposure time.
@@ -68,7 +72,7 @@ In the output list the \option{pri_data} and \option{T_data} of the data element
 }
 \value{
 A three element list containing:
-\item{data}{An updated data.table containing: RA_data, Dec_data, pri_data, T_data}
+\item{data}{An updated data.table containing: RA_data, Dec_data, pri_data, T_data, success}
 \item{fibreout}{A data.table containing the individual fibre assigments per tile: Tile, fibreID, galaxyID, sep.}
 \item{tileout}{A data.table containing the tile position information: Tile, RA_AESOP, Dec_AESOP}
 }

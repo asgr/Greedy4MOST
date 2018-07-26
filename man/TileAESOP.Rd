@@ -54,7 +54,9 @@ The basic stratgey followed is this:\cr
 - The position with the largest weighted sum is selected as the optimal 'greedy' position to place AESOP at.
 }
 \value{
-A two element numeric vector containing the AESOP central RA and Dec.
+\code{TileAESOP} returns a two element numeric vector containing the AESOP central RA and Dec.
+
+\code{denmap} returns a list of x (RA) y (Dec) and z (counts) given the radius. This can be used to make handy completeness maps.
 }
 \references{
 Robotham et al, 2010, PASA, 27, 76

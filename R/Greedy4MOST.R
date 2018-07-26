@@ -13,6 +13,7 @@ Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_dat
 
   tileout={}
   fibreout={}
+  success=rep(0,length(RA_data))
 
   for(i in tiles){
     if(weight_data[1]=='T_data'){
@@ -34,7 +35,8 @@ Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_dat
     T_data[tempFib$best_fib_lo$galaxyID]=T_data[tempFib$best_fib_lo$galaxyID]-T_AESOP
     pri_data[1:Ndata %in% tempFib$best_fib_lo$galaxyID & T_data<=0 & pri_data<pri_base]=pri_data[1:Ndata %in% tempFib$best_fib_lo$galaxyID & T_data<=0 & pri_data<pri_base]-1
     pri_data[1:Ndata %in% tempFib$best_fib_lo$galaxyID & T_data<=0 & pri_data>=pri_base]=pri_base-10
+    success[success==0 & pri_data<pri_base]=i
   }
 
-invisible(list(data=data.table(RA_data=RA_data, Dec_data=Dec_data, pri_data=pri_data, T_data=T_data), fibreout=as.data.table(fibreout), tileout=as.data.table(tileout)))
+invisible(list(data=data.table(RA_data=RA_data, Dec_data=Dec_data, pri_data=pri_data, T_data=T_data, success=success), fibreout=as.data.table(fibreout), tileout=as.data.table(tileout)))
 }

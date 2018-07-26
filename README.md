@@ -50,3 +50,12 @@ Check where we put the tiles:
 magplot(simWAVES$tileout[,list(RA_AESOP,Dec_AESOP)],asp=1)
 rect(157.3, -4, 225, 4, border='red')
 ```
+
+And we can check the final completeness:
+
+``` r
+temporig=denmap(WAVES_wide_N$RA, WAVES_wide_N$DEC, WAVES_wide_N$PRIORITY)
+tempfinal=denmap(simWAVES$data$RA_data, simWAVES$data$Dec_data, simWAVES$data$pri_data)
+magimage(x=tempfinal$x, y=tempfinal$y, z=tempfinal$z/temporig$z)
+```
+
