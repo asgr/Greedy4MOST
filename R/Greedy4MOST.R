@@ -1,4 +1,4 @@
-Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, T_AESOP=20, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4, grid=0.1, Nsamp=1e4, rad=sqrt(4.06/pi), pri_base=100, verbose=TRUE){
+Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_data='T_data', T_AESOP=20, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4, grid=0.1, Nsamp=1e4, rad=sqrt(4.06/pi), pri_base=100, verbose=TRUE){
   if (is.matrix(RA_data) || is.data.frame(RA_data)) {
     RA_data=as.matrix(RA_data)
     Dec_data = RA_data[, 2]
@@ -15,7 +15,14 @@ Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, T_AESOP=20
   fibreout={}
 
   for(i in tiles){
-    tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=T_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
+    if(weight_data[1]=='T_data'){
+      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=T_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
+    }else if(weight_data[1]=='pri_data'){
+      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=pri_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
+    }else{
+      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=weight_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
+    }
+
     if(verbose){
       message(paste(c(i, tempTile),collapse = ' '))
     }

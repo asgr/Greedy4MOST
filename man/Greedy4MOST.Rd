@@ -8,9 +8,9 @@ Greedy 4MOST Tiler
 This is the highest level interface to the greedy tiling code, and is the interface most people will/should use.
 }
 \usage{
-Greedy4MOST(tiles = 1:10, RA_data, Dec_data, pri_data, T_data, T_AESOP = 20, RAlo = 157.3,
-RAhi = 225, Declo = -4, Dechi = 4, grid = 0.1, Nsamp = 10000, rad = sqrt(4.06/pi),
-pri_base = 100, verbose = TRUE)
+Greedy4MOST(tiles = 1:10, RA_data, Dec_data, pri_data, T_data, weight_data='T_data',
+T_AESOP = 20, RAlo = 157.3, RAhi = 225, Declo = -4, Dechi = 4, grid = 0.1, Nsamp = 10000,
+rad = sqrt(4.06/pi), pri_base = 100, verbose = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +28,9 @@ Integer vector; priorities of all potential targets. Higher priorities will be a
 }
   \item{T_data}{
 Numeric vector; Estimated remaining exposure time observing weights of all potential targets. Higher weight (so remaining exposure time) targets will make it more likely that the optimal AESOP position is selected to be there (minutes).
+}
+  \item{weight_data}{
+Numeric vector; greedy observing weights of all potential targets. Higher weight targets will make it more likely that the optimal AESOP position is selected to be there. If left with the default 'T-data' then then \option{weight_data} is continually adjusted to be \option{T_data} (i.e. it uses the dynamic reduced by \option{T_AESOP} exposure time). If set to 'pri_data' then the dynamic \option{pri_data} is used.
 }
   \item{T_AESOP}{
 Numeric scalar; the time of exposure per tile (minutes).
