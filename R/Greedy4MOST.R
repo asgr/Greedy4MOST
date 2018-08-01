@@ -1,4 +1,4 @@
-Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_data='T_data', T_AESOP=20, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4, grid=0.1, Nsamp=1e4, rad=sqrt(4.06/pi), pri_base=100, verbose=TRUE){
+Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_data='T_data', T_AESOP=20, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4, grid=0.1, Nsamp=1e4, rad=sqrt(4.06/pi), pri_base=0, verbose=TRUE){
   if (is.matrix(RA_data) || is.data.frame(RA_data)) {
     RA_data=as.matrix(RA_data)
     Dec_data = RA_data[, 2]
@@ -33,9 +33,9 @@ Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_dat
     fibreout=rbind(fibreout,cbind(Tile=i, tempFib$best_fib_lo))
 
     T_data[tempFib$best_fib_lo$galaxyID]=T_data[tempFib$best_fib_lo$galaxyID]-T_AESOP
-    pri_data[1:Ndata %in% tempFib$best_fib_lo$galaxyID & T_data<=0 & pri_data<pri_base]=pri_data[1:Ndata %in% tempFib$best_fib_lo$galaxyID & T_data<=0 & pri_data<pri_base]-1
-    pri_data[1:Ndata %in% tempFib$best_fib_lo$galaxyID & T_data<=0 & pri_data>=pri_base]=pri_base-10
-    success[success==0 & pri_data<pri_base]=i
+    pri_data[1:Ndata %in% tempFib$best_fib_lo$galaxyID & T_data<=0 & pri_data<=pri_base]=pri_data[1:Ndata %in% tempFib$best_fib_lo$galaxyID & T_data<=0 & pri_data<=pri_base]-1
+    pri_data[1:Ndata %in% tempFib$best_fib_lo$galaxyID & T_data<=0 & pri_data>pri_base]=pri_base
+    success[success==0 & pri_data<=pri_base]=i
   }
 
 invisible(list(data=data.table(RA_data=RA_data, Dec_data=Dec_data, pri_data=pri_data, T_data=T_data, success=success), fibreout=as.data.table(fibreout), tileout=as.data.table(tileout)))

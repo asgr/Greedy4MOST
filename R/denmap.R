@@ -1,4 +1,4 @@
-denmap=function(RA_data, Dec_data, pri_data=pri_base, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4, grid=0.1, rad=grid, pri_base=100){
+denmap=function(RA_data, Dec_data, pri_data=pri_base, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4, grid=0.05, rad=grid, pri_base=0){
   if (is.matrix(RA_data) || is.data.frame(RA_data)) {
     RA_data=as.matrix(RA_data)
     Dec_data = RA_data[, 2]
@@ -6,6 +6,11 @@ denmap=function(RA_data, Dec_data, pri_data=pri_base, RAlo=157.3, RAhi=225, Decl
   }
   if(length(pri_data)==1){pri_data=rep(pri_data, length(RA_data))}
   if(length(pri_data)!=length(RA_data)){stop('Length of data inputs do not match!')}
+
+  if(RAlo>RAhi){
+    RA_data[RA_data>RAhi]=RA_data[RA_data>RAhi]-360
+    RAlo=RAlo-360
+  }
 
   RAseq=seq(RAlo,RAhi,by=grid)
   Decseq=seq(Declo,Dechi,by=grid)

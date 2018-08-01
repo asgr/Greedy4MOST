@@ -9,7 +9,12 @@ TileAESOP=function(RA_data, Dec_data, weight_data=1, RAlo = 129, RAhi = 141, Dec
 
   weight_data[weight_data<0]=0
 
-  tempgrid=expand.grid(seq(RAlo,RAhi,by=grid),seq(Declo,Dechi,by=grid))
+  if(RAlo<RAhi){
+    tempgrid=expand.grid(seq(RAlo,RAhi,by=grid),seq(Declo,Dechi,by=grid))
+  }else{
+    tempgrid=rbind(expand.grid(seq(RAlo,360-grid,by=grid),seq(Declo,Dechi,by=grid)), expand.grid(seq(0,RAhi,by=grid),seq(Declo,Dechi,by=grid)))
+  }
+
   tempdata=cbind(RA_data, Dec_data)
   select=selectRADec(RA_data,Dec_data,RAlo=RAlo,RAhi=RAhi,Declo=Declo,Dechi=Dechi)$select
   Nsamp=min(Nsamp, length(RA_data))
