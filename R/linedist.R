@@ -14,6 +14,12 @@
 # print(dist) # should be 5.36
 
 checkgood=function(xy_start, xy_end, z_start=0, z_end=250, threshold=0.1+0.085){
+  if(dim(xy_start)[2]!=2){stop('xy_start must be Nx2 dimensions')}
+  if(dim(xy_end)[2]!=2){stop('xy_end must be Nx2 dimensions')}
+  assertNumeric(z_start, len=1)
+  assertNumeric(z_end, len=1)
+  assertNumeric(threshold, len=1)
+
   xyz_start=as.matrix(cbind(xy_start, z_start))
   xyz_end=as.matrix(cbind(xy_end, z_end))
 
@@ -34,6 +40,11 @@ checkgood=function(xy_start, xy_end, z_start=0, z_end=250, threshold=0.1+0.085){
 }
 
 linedist=function(start1=cbind(0,0,0), end1=cbind(0,0,250), start2=cbind(0,0,0), end2=cbind(0,0,250)){
+
+  if(dim(start1)[2]!=3){stop('start1 must be Nx3 dimensions')}
+  if(dim(end1)[2]!=3){stop('end1 must be Nx3 dimensions')}
+  if(dim(start2)[2]!=3){stop('start2 must be Nx3 dimensions')}
+  if(dim(end2)[2]!=3){stop('end2 must be Nx3 dimensions')}
 
   avec=end1-start1
   bvec=end2-start2

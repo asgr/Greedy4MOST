@@ -1,6 +1,7 @@
 exportPattern("^[[:alpha:]]+")
 
 import('data.table')
+import('checkmate')
 
 importFrom('celestial', 'coordmatch')
 importFrom('sphereplot', 'car2sph', 'sph2car')

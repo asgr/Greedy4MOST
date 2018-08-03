@@ -9,4 +9,4 @@ Description: It uses the Robotham 2010 Greedy approach to tile a survey with 4MO
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: rgl, sphereplot, data.table, celestial (>= 1.4.3), pracma, RANN
+Imports: rgl, sphereplot, data.table, celestial (>= 1.4.3), pracma, RANN, checkmate

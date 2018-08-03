@@ -1,11 +1,39 @@
-Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_data='T_data', T_AESOP=20, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4, grid=0.1, Nsamp=1e4, rad=sqrt(4.06/pi), pri_base=0, verbose=TRUE, seed=666){
+Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_data='T_data', T_AESOP=20, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4, grid=0.1, Nsamp=1e4, rad=sqrt(4.06/pi), pri_base=0, verbose=TRUE, seed=Sys.time()){
+  if(!missing(seed)){
+    set.seed(as.integer(seed))
+  }
   if (is.matrix(RA_data) || is.data.frame(RA_data)) {
     RA_data=as.matrix(RA_data)
     Dec_data = RA_data[, 2]
     RA_data = RA_data[, 1]
   }
+  if(length(pri_data)==1){T_data=rep(pri_data, length(RA_data))}
+  if(length(pri_data)!=length(RA_data)){stop('Length of pri_data inputs do not match!')}
   if(length(T_data)==1){T_data=rep(T_data, length(RA_data))}
-  if(length(T_data)!=length(RA_data)){stop('Length of data inputs do not match!')}
+  if(length(T_data)!=length(RA_data)){stop('Length of T_data inputs do not match!')}
+
+  #Check assertions:
+  assertIntegerish(tiles)
+  assertNumeric(RA_data)
+  assertNumeric(Dec_data)
+  assertIntegerish(pri_data)
+  assertNumeric(T_data)
+  if(length(weight_data)==1){
+    assertCharacter(weight_data)
+  }else{
+    assertNumeric(weight_data)
+  }
+  assertNumeric(T_AESOP)
+  assertNumeric(RAlo, len=1)
+  assertNumeric(RAhi, len=1)
+  assertNumeric(Declo, len=1)
+  assertNumeric(Dechi, len=1)
+  assertNumeric(grid, len=1)
+  assertIntegerish(Nsamp, len=1)
+  assertNumeric(rad, len=1)
+  assertIntegerish(pri_base, len=1)
+  assertLogical(verbose, len=1)
+  assertNumeric(seed, len=1)
 
   T_data[T_data<0]=0
 
@@ -17,11 +45,11 @@ Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_dat
 
   for(i in tiles){
     if(weight_data[1]=='T_data'){
-      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=T_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad, seed=seed)$useloc
+      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=T_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
     }else if(weight_data[1]=='pri_data'){
-      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=pri_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad, seed=seed)$useloc
+      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=pri_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
     }else{
-      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=weight_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad, seed=seed)$useloc
+      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=weight_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
     }
 
     if(verbose){

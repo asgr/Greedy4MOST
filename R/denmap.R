@@ -12,6 +12,18 @@ denmap=function(RA_data, Dec_data, pri_data=pri_base, RAlo=157.3, RAhi=225, Decl
     RAlo=RAlo-360
   }
 
+  #Check assertions:
+  assertNumeric(RA_data)
+  assertNumeric(Dec_data)
+  assertIntegerish(pri_data)
+  assertNumeric(RAlo, len=1)
+  assertNumeric(RAhi, len=1)
+  assertNumeric(Declo, len=1)
+  assertNumeric(Dechi, len=1)
+  assertNumeric(grid, len=1)
+  assertNumeric(rad, len=1)
+  assertIntegerish(pri_base, len=1)
+
   RAseq=seq(RAlo,RAhi,by=grid)
   Decseq=seq(Declo,Dechi,by=grid)
   tempgrid=expand.grid(RAseq,Decseq)

@@ -1,5 +1,4 @@
-TileAESOP=function(RA_data, Dec_data, weight_data=1, RAlo = 129, RAhi = 141, Declo = -2, Dechi = 3, grid=0.1, Nsamp=1e4, rad=sqrt(4.06/pi), seed=666){
-  set.seed(seed)
+TileAESOP=function(RA_data, Dec_data, weight_data=1, RAlo = 129, RAhi = 141, Declo = -2, Dechi = 3, grid=0.1, Nsamp=1e4, rad=sqrt(4.06/pi), seed=Sys.time()){
   if (is.matrix(RA_data) || is.data.frame(RA_data)) {
     RA_data=as.matrix(RA_data)
     Dec_data = RA_data[, 2]
@@ -7,6 +6,22 @@ TileAESOP=function(RA_data, Dec_data, weight_data=1, RAlo = 129, RAhi = 141, Dec
   }
   if(length(weight_data)==1){weight_data=rep(weight_data, length(RA_data))}
   if(length(weight_data)!=length(RA_data)){stop('Length of data inputs do not match!')}
+
+  #Check assertions:
+  assertNumeric(RA_data)
+  assertNumeric(Dec_data)
+  assertNumeric(weight_data)
+  assertNumeric(RAlo, len=1)
+  assertNumeric(RAhi, len=1)
+  assertNumeric(Declo, len=1)
+  assertNumeric(Dechi, len=1)
+  assertNumeric(grid, len=1)
+  assertNumeric(rad, len=1)
+  assertNumeric(seed, len=1)
+
+  if(!missing(seed)){
+    set.seed(as.integer(seed))
+  }
 
   weight_data[weight_data<0]=0
 

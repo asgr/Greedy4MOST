@@ -11,7 +11,7 @@ This is the highest level interface to the greedy tiling code, and is the interf
 \usage{
 Greedy4MOST(tiles = 1:10, RA_data, Dec_data, pri_data, T_data, weight_data='T_data',
 T_AESOP = 20, RAlo = 157.3, RAhi = 225, Declo = -4, Dechi = 4, grid = 0.1, Nsamp = 10000,
-rad = sqrt(4.06/pi), pri_base = 0, verbose = TRUE, seed = 666)
+rad = sqrt(4.06/pi), pri_base = 0, verbose = TRUE, seed = Sys.time())
 
 denmap(RA_data, Dec_data, pri_data=pri_base, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4,
 grid=0.05, rad=grid, pri_base=0)
@@ -67,7 +67,7 @@ Numeric scalaer; the baseline (so starting reference) priority. Anything below t
 Logical; should tile position messages be printed to the screen?
 }
   \item{seed}{
-Integer scalar; set the random seed for sampling (default of 666 ensures repeatability).
+Integer scalar; set the random seed for sampling (default of Sys.time() ensures it is random and not repeatable).
 }
 }
 \details{

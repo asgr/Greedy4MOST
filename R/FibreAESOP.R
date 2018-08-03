@@ -15,6 +15,17 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
   if(length(res_data)==1){res_data=rep(res_data,length(RA_data))}
   if(length(assign_AESOP)==1){assign_AESOP=rep(assign_AESOP,dim(GreedyEnv$AESOP_fibres)[1])}
 
+  #Check assertions:
+  assertNumeric(RA_data)
+  assertNumeric(Dec_data)
+  assertNumeric(RA_AESOP, len=1)
+  assertNumeric(Dec_AESOP, len=1)
+  assertIntegerish(pri_data)
+  assertCharacter(res_data)
+  assertLogical(assign_AESOP)
+  assertNumeric(avoid, len=1)
+  assertNumeric(threshold, len=1)
+
 
   if(length(pri_data) != length(RA_data)){stop('pri_data is not the right length')}
   if(length(assign_AESOP) != dim(GreedyEnv$AESOP_fibres)[1]){stop('assign_AESOP is not the right length')}

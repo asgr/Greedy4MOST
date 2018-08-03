@@ -9,7 +9,7 @@ Given coordinates and weights for a data set, this function will compute the opt
 }
 \usage{
 TileAESOP(RA_data, Dec_data, weight_data = 1, RAlo = 129, RAhi = 141, Declo = -2,
-Dechi = 3, grid = 0.1, Nsamp = 10000, rad = sqrt(4.06/pi), seed=666)
+Dechi = 3, grid = 0.1, Nsamp = 10000, rad = sqrt(4.06/pi), seed = Sys.time())
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -44,7 +44,7 @@ Numeic integer; number of sample points to select from the target data (too larg
 Numeic scalar; the effective radius of AESOP assumed (we apprpoximate the field of view to be circular for speed).
 }
   \item{seed}{
-Integer scalar; set the random seed for sampling (default of 666 ensures repeatability).
+Integer scalar; set the random seed for sampling (default of Sys.time() ensures it is random and not repeatable).
 }
 }
 \details{
