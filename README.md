@@ -71,8 +71,8 @@ for(i in 1:1000){
 
   png(paste0('comp',formatC(i,flag=0, width=3),'.png'),width=1200,height=300)
   par(mar=c(3.1,3.1,1.1,1.1))
-  magimage(x=temporig, y=temporig, z=tempcurrent$z/temporig$z, magmap=FALSE, zlim=c(0,1),
-  xlab='RA / deg', ylab='Dec / deg')
+  magimage(x=temporig$x, y=temporig$y, z=tempcurrent$z/temporig$z, magmap=FALSE,
+  zlim=c(0,1), xlab='RA / deg', ylab='Dec / deg')
   legend('topright',legend=paste('Tile',i))
   dev.off()
 }
