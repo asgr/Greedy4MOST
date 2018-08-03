@@ -66,7 +66,7 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
 
     for(pri in pri_data_list){
       reftemp=ref[pri_data==pri & res_data %in% 'lo' & 1:length(ref) %in% check]
-      if(length(reftemp)>0){
+      if(length(reftemp)>0 & length(select_AESOP_lo)>0){
         match_fib=coordmatch(AESOP_pos$sph[select_AESOP_lo,,drop=FALSE], cbind(RA_data[reftemp], Dec_data[reftemp]), rad=GreedyEnv$AESOP_fibres$patrol_asec[select_AESOP_lo])
         if(!all(is.na(match_fib$Nmatch))){
           best_fib_lo=rbind(best_fib_lo, data.table(fibreID=select_AESOP_lo[match_fib$bestmatch$refID], galaxyID=reftemp[match_fib$bestmatch$compareID], sep=match_fib$bestmatch$sep))
@@ -80,7 +80,7 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
 
     for(pri in pri_data_list){
       reftemp=ref[pri_data==pri & res_data %in% 'hi' & 1:length(ref) %in% check]
-      if(length(reftemp)>0){
+      if(length(reftemp)>0 & length(select_AESOP_hi)>0){
         match_fib=coordmatch(AESOP_pos$sph[select_AESOP_lo,,drop=FALSE], cbind(RA_data[reftemp], Dec_data[reftemp]), rad=GreedyEnv$AESOP_fibres$patrol_asec[select_AESOP_lo])
         if(!all(is.na(match_fib$Nmatch))){
           best_fib_hi=rbind(best_fib_hi, data.table(fibreID=select_AESOP_hi[match_fib$bestmatch$refID], galaxyID=reftemp[match_fib$bestmatch$compareID], sep=match_fib$bestmatch$sep))

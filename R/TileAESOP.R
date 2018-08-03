@@ -1,4 +1,5 @@
-TileAESOP=function(RA_data, Dec_data, weight_data=1, RAlo = 129, RAhi = 141, Declo = -2, Dechi = 3, grid=0.1, Nsamp=1e4, rad=sqrt(4.06/pi)){
+TileAESOP=function(RA_data, Dec_data, weight_data=1, RAlo = 129, RAhi = 141, Declo = -2, Dechi = 3, grid=0.1, Nsamp=1e4, rad=sqrt(4.06/pi), seed=666){
+  set.seed(seed)
   if (is.matrix(RA_data) || is.data.frame(RA_data)) {
     RA_data=as.matrix(RA_data)
     Dec_data = RA_data[, 2]

@@ -2,7 +2,7 @@ Package: Greedy4MOST
 Type: Package
 Title: Tiles a Survey with 4MOST and AESOP
 Version: 0.1.0
-Date: 26/07/2018
+Date: 2018-08-03
 Author: Aaron Robotham
 Maintainer: Aaron Robotham <aaron.robotham@uwa.edu.au>
 Description: It uses the Robotham 2010 Greedy approach to tile a survey with 4MOST, accounting for the major observing restrictions.
