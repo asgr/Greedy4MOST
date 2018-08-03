@@ -28,7 +28,7 @@ WAVES_wide_N=WAVESfull[RA>157.3 & RA<225 & SDSS_z_Apparent<20.5, list(CATAID, RA
 PRIORITY, TEXP_D, SDSS_z_Apparent)]
 WAVES_wide_N=WAVES_wide_N[-which(is.na(TEXP_D)),]
 WAVES_wide_N[TEXP_D>600,TEXP_D:=600]
-WAVES_wide_N[,PRIORITY:=PRIORITY+as.integer(floor(TEXP_D/100))]
+WAVES_wide_N[,PRIORITY:=as.integer(floor(TEXP_D/100))]
 ```
 
 ### Let's get Greedy:
@@ -77,5 +77,3 @@ for(i in 1:1000){
   dev.off()
 }
 ```
-
-
