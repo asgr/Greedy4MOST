@@ -18,13 +18,13 @@ FibreAESOP=function(RA_data, Dec_data, RA_AESOP=0, Dec_AESOP=0, pri_data=9, res_
   #Check assertions:
   assertNumeric(RA_data)
   assertNumeric(Dec_data)
-  assertNumeric(RA_AESOP, len=1)
-  assertNumeric(Dec_AESOP, len=1)
+  assertScalar(RA_AESOP)
+  assertScalar(Dec_AESOP)
   assertIntegerish(pri_data)
   assertCharacter(res_data)
   assertLogical(assign_AESOP)
-  assertNumeric(avoid, len=1)
-  assertNumeric(threshold, len=1)
+  assertScalar(avoid)
+  assertScalar(threshold)
 
 
   if(length(pri_data) != length(RA_data)){stop('pri_data is not the right length')}

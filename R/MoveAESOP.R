@@ -1,7 +1,7 @@
 MoveAESOP=function(RA_AESOP=0, Dec_AESOP=0){
   #Check assertions:
-  assertNumeric(RA_AESOP, len=1)
-  assertNumeric(Dec_AESOP, len=1)
+  assertScalar(RA_AESOP)
+  assertScalar(Dec_AESOP)
 
   x0_rad=y0_rad=NULL
   rotdec=rotate3d(as.matrix(cbind(GreedyEnv$AESOP_fibres[,list(x0_rad,y0_rad)],1)), x=1, y=0, z=0, angle=pi/2-Dec_AESOP*pi/180)

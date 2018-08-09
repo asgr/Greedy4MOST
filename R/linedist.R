@@ -16,9 +16,9 @@
 checkgood=function(xy_start, xy_end, z_start=0, z_end=250, threshold=0.1+0.085){
   if(dim(xy_start)[2]!=2){stop('xy_start must be Nx2 dimensions')}
   if(dim(xy_end)[2]!=2){stop('xy_end must be Nx2 dimensions')}
-  assertNumeric(z_start, len=1)
-  assertNumeric(z_end, len=1)
-  assertNumeric(threshold, len=1)
+  assertScalar(z_start)
+  assertScalar(z_end)
+  assertScalar(threshold)
 
   xyz_start=as.matrix(cbind(xy_start, z_start))
   xyz_end=as.matrix(cbind(xy_end, z_end))

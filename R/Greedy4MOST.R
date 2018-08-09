@@ -24,16 +24,16 @@ Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_dat
     assertNumeric(weight_data)
   }
   assertNumeric(T_AESOP)
-  assertNumeric(RAlo, len=1)
-  assertNumeric(RAhi, len=1)
-  assertNumeric(Declo, len=1)
-  assertNumeric(Dechi, len=1)
-  assertNumeric(grid, len=1)
-  assertIntegerish(Nsamp, len=1)
-  assertNumeric(rad, len=1)
-  assertIntegerish(pri_base, len=1)
-  assertLogical(verbose, len=1)
-  assertNumeric(seed, len=1)
+  assertScalar(RAlo)
+  assertScalar(RAhi)
+  assertScalar(Declo)
+  assertScalar(Dechi)
+  assertScalar(grid)
+  assertInt(Nsamp)
+  assertScalar(rad)
+  assertInt(pri_base)
+  assertFlag(verbose)
+  assertScalar(seed)
 
   T_data[T_data<0]=0
 

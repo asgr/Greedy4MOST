@@ -7,10 +7,10 @@ selectRADec=function(RA, Dec, RAlo = 129, RAhi = 141, Declo = -2, Dechi = 3){
   #Check assertions:
   assertNumeric(RA)
   assertNumeric(Dec)
-  assertNumeric(RAlo, len=1)
-  assertNumeric(RAhi, len=1)
-  assertNumeric(Declo, len=1)
-  assertNumeric(Dechi, len=1)
+  assertScalar(RAlo)
+  assertScalar(RAhi)
+  assertScalar(Declo)
+  assertScalar(Dechi)
 
   RA=RA %% 360
   RAlo=RAlo %% 360
