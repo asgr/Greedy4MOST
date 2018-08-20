@@ -44,12 +44,16 @@ Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_dat
   success=rep(0,length(RA_data))
 
   for(i in tiles){
-    if(weight_data[1]=='T_data'){
-      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=T_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
-    }else if(weight_data[1]=='pri_data'){
-      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=pri_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
+    if(RAlo==RAhi & Declo==Dechi){
+      tempTile=c(RAlo, Declo)
     }else{
-      tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=weight_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
+      if(weight_data[1]=='T_data'){
+        tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=T_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
+      }else if(weight_data[1]=='pri_data'){
+        tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=pri_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
+      }else{
+        tempTile=TileAESOP(RA_data=RA_data, Dec_data=Dec_data, weight_data=weight_data, RAlo = RAlo, RAhi = RAhi, Declo = Declo, Dechi = Dechi, grid=grid, Nsamp=Nsamp, rad=rad)$useloc
+      }
     }
 
     if(verbose){
