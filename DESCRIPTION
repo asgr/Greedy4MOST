@@ -10,5 +10,5 @@ License: LGPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: rgl, sphereplot, data.table, celestial (>= 1.4.3), pracma, RANN, checkmate
-Suggest: knitr
+Suggests: knitr, viridisLite
 VignetteBuilder: knitr
