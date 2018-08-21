@@ -44,15 +44,15 @@ The 3D fibre-fibre avoidance criterion for AESOP, as per 'VIS-DER-4MOST-47110-09
 }
 }
 \details{
-In \code{FibreAESOP} the basic stratgey followed is this:\cr
+The basic \code{FibreAESOP} stratgey followed is this:\cr
 
 - Find all fibres that might collide on the focal plane given the \option{avoid} tolerance. If there are collision, remove the lower priority colliding target.\cr
 
-- Assign as many highest priority targets as possible given patrol radius contraints of AESOP.\cr
+- Assign as many highest priority targets as possible given the patrol radius contraints of AESOP. We always assign nearest-to-fibre-home-position first for two equal priority targets, if possible.\cr
 
-- If fibres remain, go the next lowest priority and assign more fibres (repeat this process until out of fibres or targets).\cr
+- If there are spare AESOP fibres remaining, go the next lowest priority and assign more fibres (repeat this process until out of fibres or targets).\cr
 
-- Once all fibres are assigned, send the assignment list to \code{\link{checkgood}}, which check exhaustively for collisions in 3D space given the \option{threshold} avoidance criterion. If there are collisions in 3D then remove all the lower priority (or if same priority, remove the one with a larger ID) colliding target/s and repeat the above process from scratch.\cr
+- Once all fibres are assigned, send the assignment list to \code{\link{checkgood}}, which checks exhaustively for collisions in 3D space given the \option{threshold} avoidance criterion. If there are collisions in 3D then remove all the lower priority (or if same priority, remove the one with a larger ID) colliding target/s and repeat the above process from scratch.\cr
 
 - Return output once either all objects that can be assigned are assigned, or out of fibres. The output is guaranteed to meet the AESOP avoidance criteria as advertised, so it should be useable without issue (hopefully).\cr
 

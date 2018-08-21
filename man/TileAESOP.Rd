@@ -48,13 +48,15 @@ Integer scalar; set the random seed for sampling (default of Sys.time() ensures 
 }
 }
 \details{
-The basic stratgey followed is this:\cr
+The basic \code{TileAESOP} stratgey followed is this:\cr
 
-- At all grid positions all potential AESOP targets are found within the AESOP FOV by the specified \option{RA_data} and \option{Dec_data}.\cr
+- At all grid positions all potential AESOP targets are found within the AESOP FoV by the specified \option{RA_data} and \option{Dec_data}.\cr
 
-- The targets are weighted by their \option{weight_data} and summed for each potential AESOP pointing.\cr
+- The targets are weighted by their \option{weight_data} and summed for each potential AESOP pointing (i.e. only targets within a given FoV are used).\cr
 
-- The position with the largest weighted sum is selected as the optimal 'greedy' position to place AESOP at.
+- The position with the largest weighted sum is selected as the optimal 'greedy' position to place AESOP at.\cr
+
+If \option{RAlo}=\option{RAhi} and \option{Declo}=\option{Dechi} then the greedy calculation is skipped and the RA=\option{RAlo} and Dec=\option{Declo}. This is a convenience feature for tiling a region with a single tile (like the COSMOS WAVES-Deep region).
 }
 \value{
 \code{TileAESOP} returns a two element numeric vector containing the AESOP central RA and Dec.

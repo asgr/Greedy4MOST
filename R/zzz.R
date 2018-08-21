@@ -3,15 +3,16 @@
 #Original filename: /home/tdwelly/4most/OpSim/inputs_to_system_model/AESOP/info_2016-04-05/aesop-cfg.json
 #This file contains one entry per Fiber/Positioner, and gives the coordinates and details of each fiber
 #Other info:
-#Pitch is 9.542mm between fibres
-#Fibre size is 0.085, so 1.43 asec
-#Plate scale is 0.0594 mm/asec
-#FoV is 535mm = 2.502 degrees diameter
-#Rad curve 4,653 mm
-#3D avoidance is 0.1mm
-#Tip avoidance is 0.9mm
+#Other info:
+#Plate scale: 0.0594 mm/asec
+#Closest pitch between fibres: 9.542mm (160.6397 asec)
+#Fibre size is 0.085 (1.430976 asec)
+#FoV is diameter: 535mm (2.501871 deg)
+#Radius of curvature at focal plane: 4,653 mm
+#3D avoidance is 0.1mm (1.683502 asec)
+#Tip avoidance is 0.9mm (15.15152 asec) ignoring the fibre radius
 #Spine length is 250mm
-#Patrol requirement is 11.5mm, but in practice they expect 12.3mm +/- 0.5 (so 11.8-12.8mm)
+#Patrol requirement is 11.5mm (193.6027 asec), but in practice they expect 12.3mm (207.0707 asec) +/- 0.5 (8.417508 asec), i.e. 11.8mm (198.6532 asec) - 12.8mm (215.4882 asec)
 #Description of columns:
 #Index  Name        Format    Description
 #-----  ----------- --------- --------------------------------------------------------------------------------

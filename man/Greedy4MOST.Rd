@@ -81,6 +81,9 @@ A three element list containing:
 \item{fibreout}{A data.table containing the individual fibre assigments per tile: Tile, fibreID, galaxyID, sep.}
 \item{tileout}{A data.table containing the tile position information: Tile, RA_AESOP, Dec_AESOP}
 }
+\references{
+Robotham et al, 2010, PASA, 27, 76
+}
 \author{
 Aaron Robotham
 }
