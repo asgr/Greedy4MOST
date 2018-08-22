@@ -46,7 +46,7 @@ The 3D fibre-fibre avoidance criterion for AESOP, as per 'VIS-DER-4MOST-47110-09
 \details{
 The basic \code{FibreAESOP} stratgey followed is this:\cr
 
-- Find all fibres that might collide on the focal plane given the \option{avoid} tolerance. If there are collision, remove the lower priority colliding target.\cr
+- Find all fibres that might collide on the focal plane given the \option{avoid} tolerance. If there are collisions, remove the lower priority colliding target.\cr
 
 - Assign as many highest priority targets as possible given the patrol radius contraints of AESOP. We always assign nearest-to-fibre-home-position first for two equal priority targets, if possible.\cr
 
