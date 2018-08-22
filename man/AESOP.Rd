@@ -34,8 +34,8 @@ This file contains one entry per Fiber/Positioner, and gives the coordinates and
 \item Fibre size is 0.085 (1.430976 asec)
 \item FoV is diameter: 535mm (2.501871 deg)
 \item Radius of curvature at focal plane: 4,653 mm
-\item 3D avoidance is 0.1mm (1.683502 asec) ignoring the fibre radius
-\item Tip avoidance is 0.9mm (15.15152 asec)
+\item 3D avoidance below the focal plane is 0.1mm (1.683502 asec) ignoring the fibre radius
+\item Tip avoidance on the focal plane is 0.9mm (15.15152 asec)
 \item Spine length is 250mm
 \item Patrol requirement is 11.5mm (193.6027 asec), but in practice they expect 12.3mm (207.0707 asec) +/- 0.5 (8.417508 asec), i.e. 11.8mm (198.6532 asec) - 12.8mm (215.4882 asec)
 }
