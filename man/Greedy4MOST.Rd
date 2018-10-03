@@ -9,11 +9,11 @@ Greedy 4MOST Tiler
 This is the highest level interface to the greedy tiling code, and is the interface most people will/should use.
 }
 \usage{
-Greedy4MOST(tiles = 1:10, RA_data, Dec_data, pri_data, T_data, weight_data='T_data',
+Greedy4MOST(tiles = 1:10, RA_data, Dec_data, pri_data, T_data, weight_data = 'T_data',
 T_AESOP = 20, RAlo = 157.3, RAhi = 225, Declo = -4, Dechi = 4, grid = 0.1, Nsamp = 10000,
 rad = sqrt(4.06/pi), pri_base = 0, verbose = TRUE, seed = Sys.time())
 
-denmap(RA_data, Dec_data, pri_data=pri_base, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4,
+denmap(RA_data, Dec_data, pri_data = 1, RAlo = 157.3, RAhi = 225, Declo = -4, Dechi = 4,
 grid=0.05, rad=grid, pri_base=0)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -40,28 +40,28 @@ Numeric vector; greedy observing weights of all potential targets. Higher weight
 Numeric scalar; the time of exposure per tile (minutes).
 }
   \item{RAlo}{
-Numeic scalar; the assumed low right ascension extent of the data (degrees).
+Numeric scalar; the assumed low right ascension extent of the data (degrees). Note if \option{RAlo}=\option{RAhi} and \option{Declo}=\option{Dechi} then this fixes the RA and Dec position of the AESOP FoV.
 }
   \item{RAhi}{
-Numeic scalar; the assumed high right ascension extent of the data (degrees).
+Numeric scalar; the assumed high right ascension extent of the data (degrees). Note if \option{RAlo}=\option{RAhi} and \option{Declo}=\option{Dechi} then this fixes the RA and Dec position of the AESOP FoV.
 }
   \item{Declo}{
-Numeic scalar; the assumed low declination extent of the data (degrees).
+Numeric scalar; the assumed low declination extent of the data (degrees). Note if \option{RAlo}=\option{RAhi} and \option{Declo}=\option{Dechi} then this fixes the RA and Dec position of the AESOP FoV.
 }
   \item{Dechi}{
-Numeic scalar; the assumed high declination extent of the data (degrees).
+Numeric scalar; the assumed high declination extent of the data (degrees). Note if \option{RAlo}=\option{RAhi} and \option{Declo}=\option{Dechi} then this fixes the RA and Dec position of the AESOP FoV.
 }
   \item{grid}{
-Numeic scalar; the grid step size for potential AESOP tile centres (degrees).
+Numeric scalar; the grid step size for potential AESOP tile centres (degrees).
 }
   \item{Nsamp}{
-Numeic integer; number of sample points to select from the target data (too large will make the tiling very slow).
+Numeric integer; number of sample points to select from the target data (too large will make the tiling very slow).
 }
   \item{rad}{
-Numeic scalar; for \code{Greedy4MOST} the effective radius of AESOP assumed (we approximate the field of view to be circular for speed); for \code{denmap} the radius to use for local density.
+Numeric scalar; for \code{Greedy4MOST} the effective radius of AESOP assumed (we approximate the field of view to be circular for speed); for \code{denmap} the radius to use for local density.
 }
   \item{pri_base}{
-Numeric scalaer; the baseline (so starting reference) priority. Anything below this should be considered to be observed, and anything equal or above still needs some exposure time.
+Numeric scalaer; the baseline (so starting reference) priority. Anything below or equal to this should be considered to be observed, and anything above still needs some exposure time.
 }
   \item{verbose}{
 Logical; should tile position messages be printed to the screen?
@@ -74,6 +74,8 @@ Integer scalar; set the random seed for sampling (default of Sys.time() ensures 
 In the output list the \option{pri_data} and \option{T_data} of the data element is updated such that \option{T_AESOP} is subtracted from \option{T_data} every time that target gets a fibre. When \option{T_data} si less than or equal to 0 for the first time \option{pri_data} is set to \option{pri_base}-10 (so 90 if the default \option{pri_base}=100 is used). If objects that have already been successfully observed (so \option{pri_data}<\option{pri_base}) get a further fibre then \option{pri_data} is reduced by 1 each time, so a value of \option{pri_data}=85 means it received 5 more exposures than needed to meet its success criterion.
 
 In \code{denmap} the default radius (\option{rad}) of 0.05 degrees is close to 11.5/0.0594/3600=0.054, which is the most problematic scale for AESOP fibres since only at most 18 or 19 (12 or 13 low res) fibres can exist within 11.5mm of a target (given the 9.5mm pitch and 11.5 mm patrol radius). This ends up being ~3 arc minutes, which happens to be a typical scale for groups and clusters on the sky.
+
+Note if \option{RAlo}=\option{RAhi} and \option{Declo}=\option{Dechi} then this fixes the RA and Dec position of the AESOP FoV. This will speed up compuation when you only want to configure fibres on a single fixed field.
 }
 \value{
 A three element list containing:

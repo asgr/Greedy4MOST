@@ -1,4 +1,4 @@
-denmap=function(RA_data, Dec_data, pri_data=pri_base, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4, grid=0.05, rad=grid, pri_base=0){
+denmap=function(RA_data, Dec_data, pri_data=1, RAlo=157.3, RAhi=225, Declo=-4, Dechi=4, grid=0.05, rad=grid, pri_base=0){
   if (is.matrix(RA_data) || is.data.frame(RA_data)) {
     RA_data=as.matrix(RA_data)
     Dec_data = RA_data[, 2]
@@ -33,7 +33,7 @@ denmap=function(RA_data, Dec_data, pri_data=pri_base, RAlo=157.3, RAhi=225, Decl
   Dec_data=Dec_data[select]
   pri_data=pri_data[select]
   tempdata=cbind(RA_data, Dec_data)
-  tempdata=tempdata[pri_data>pri_base,]
+  tempdata=tempdata[pri_data>pri_base,,drop=FALSE]
   denmat=coordmatch(tempgrid, tempdata, rad=rad, radunit='deg', kstart = 100, smallapprox=TRUE)$Nmatch
   invisible(list(x=RAseq, y=Decseq, z=matrix(denmat, nrow=length(RAseq))))
 }

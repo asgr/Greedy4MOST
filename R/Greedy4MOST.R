@@ -57,7 +57,7 @@ Greedy4MOST=function(tiles=1:10, RA_data, Dec_data, pri_data, T_data, weight_dat
     }
 
     if(verbose){
-      message(paste(c(i, tempTile),collapse = ' '))
+      message(paste(c(i, round(tempTile,2)),collapse = ' '))
     }
     tempFib=FibreAESOP(RA_data=RA_data, Dec_data=Dec_data, RA_AESOP=tempTile[1], Dec_AESOP=tempTile[2], pri_data=pri_data)
 
